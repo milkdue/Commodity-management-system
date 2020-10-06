@@ -43,19 +43,47 @@
 1. 判断redux中isLogin
 2. Redirect
 
-## 退出登录
+## token验证
+
+## layout布局
+
+## 子路由搭建
+
+## 头部布局
+
+## 登录状态过期提示
+
+## 全屏(github: screenfull)
+
+## ## 退出登录
 
 1. 清空redux中userInfo
 2. 清空localstorage.remove()
 3. 跳转login
-4. 使用装饰器Decorator
 
-```js
-@f
+## 时间
 
-class A{}
+## 获取位置(http://whois.pconline.com.cn/ipJson.jsp?jsonp=true)
 
-----------
+1. 支持jsonp
 
-A = f(A)
-```
+## 获取天气(ajax跨域)
+
+- 接口： http://wthrcdn.etouch.cn/weather_mini?city=北京
+- 中央气象台免费接口，支持跨域
+
+- 百度天气图片ui,未做防盗链
+
+1. http://api.map.baidu.com/images/weather/day/duoyun.png
+2. http://api.map.baidu.com/images/weather/day/qing.png
+3. http://api.map.baidu.com/images/weather/day/xiaoyu.png
+4. http://api.map.baidu.com/images/weather/day/zhongyu.png
+5. http://api.map.baidu.com/images/weather/day/dayu.png
+6. http://api.map.baidu.com/images/weather/day/yin.png
+7. http://api.map.baidu.com/images/weather/day/leizhenyu.png
+8. http://api.map.baidu.com/images/weather/day/zhenyu.png
+
+## withRouter
+
+1. 高阶组件(装饰器语法)
+2. 使用路由组件中的this.props.location.pathname
