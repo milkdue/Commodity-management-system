@@ -90,7 +90,7 @@
 
 ## 全屏(github: screenfull)
 
-## ## 退出登录
+## 退出登录
 
 1. 清空redux中userInfo
 2. 清空localstorage.remove()
