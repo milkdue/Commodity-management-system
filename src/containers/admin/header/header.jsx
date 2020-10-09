@@ -8,12 +8,16 @@ import {deleteUserInfoAction} from '../../../redux/actions/create_or_delete_user
 import {dateFormat} from '../../../myFunction/time_format.js';
 import {imgUrl} from '../../../myFunction/accord_weather_to_img';
 import {reqLocal, reqWeather} from '../../../api/index.js';
+import menuList from '../../../config/menu-config.js';
 import './css/header.less';
 
 const { confirm } = Modal;
 
 @connect(
-    state => ({userInfo: state.userInfo}),
+    state => ({
+        userInfo: state.userInfo,
+        title: state.title
+    }),
     {
         deleteUserInfo: deleteUserInfoAction
     }
@@ -21,18 +25,18 @@ const { confirm } = Modal;
 @withRouter
 class Header extends Component{
     state = {
-        isFullScreen: false,
-        time: dateFormat("YYYY-mm-dd HH:MM:SS", new Date()),
-        local: '',
-        weatherUrl: '',
-        weatherType: '',
-        temperature: ''
+        isFullScreen: false, // 是否全屏
+        time: dateFormat("YYYY-mm-dd HH:MM:SS", new Date()), // 时间格式化
+        local: '', // 位置
+        weatherUrl: '', // 天气图片url
+        weatherType: '', // 天气类型
+        temperature: '', // 温度状况
+        title: '' // 标题
     }
 
     timerId = 0;
 
     componentDidMount(){
-        console.log(this.props);
         // 发请求获取位置
         reqLocal()
             .then(result => {
@@ -59,6 +63,8 @@ class Header extends Component{
             let time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
             this.setState({time});
         }, 1000);
+
+        this.getTitle();
     }
 
     componentWillUnmount(){
@@ -66,6 +72,25 @@ class Header extends Component{
         screenfull.off('change', this.changeFullState);
         // 清除定时器
         clearInterval(this.timerId);
+    }
+
+    // 获取标题
+    getTitle = () => {
+        let key = this.props.location.pathname.split('/');
+        if(key.indexOf('product') !== -1) key = 'product';
+        else key = key[key.length - 1];
+        menuList.forEach((item) => {
+            if(!item.children){
+                if(item.key === key) this.setState({title: item.title})
+            }else{
+                let temp = item.children.find((children) => {
+                    return children.key === key;
+                })
+
+                if(temp) this.setState({title: temp.title})
+            }
+        })
+        
     }
     // 改变全屏状态
     changeFullState = () => {
@@ -110,7 +135,7 @@ class Header extends Component{
                     <Button type="link" onClick={this.loginOut}>退出</Button>
                 </div>
                 <div className="header-bottom">
-                    <section className="header-bottom-left">{this.props.location.pathname}</section>
+                    <section className="header-bottom-left">{this.props.title || this.state.title}</section>
                     <div className="header-bottom-right">
                         <span>{time}</span>
                         <span className="local">{local}</span>

@@ -11,6 +11,9 @@ import Role from '../role/role.jsx';
 import Bar from '../bar/bar.jsx';
 import Line from '../line/line.jsx';
 import Pie from '../pie/pie.jsx';
+import LeftNav from './left_nav/left_nav.jsx';
+import ProductDetail from '../product/product_detail/product_detail.jsx';
+import ProductAddUpdate from '../product/product_add_update/produc_add_update.jsx';
 import './css/admin.less';
 
 const { Footer, Sider, Content } = Layout;
@@ -22,17 +25,22 @@ const { Footer, Sider, Content } = Layout;
 )
 class Admin extends Component{
     render(){
-        const {isLogin, user} = this.props.userInfo;
+        const {isLogin} = this.props.userInfo;
         if(isLogin){
             return (
                 <Layout className="admin">
-                    <Sider className="sider">Sider</Sider>
+                    <Sider className="sider">
+                        <LeftNav/>
+                    </Sider>
                     <Layout>
                         <Header />
                         <Content className="content">
                             <Switch>
                                 <Route path="/admin/home" component={Home}/>
                                 <Route path="/admin/production/category" component={Category}/>
+                                <Route path="/admin/production/product/detail/:id" component={ProductDetail}/>
+                                <Route path="/admin/production/product/add_update/:id" component={ProductAddUpdate}/>
+                                <Route path="/admin/production/product/add_update" component={ProductAddUpdate}/>
                                 <Route path="/admin/production/product" component={Product}/>
                                 <Route path="/admin/user" component={User}/>
                                 <Route path="/admin/role" component={Role}/>

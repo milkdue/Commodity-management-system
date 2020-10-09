@@ -3,9 +3,9 @@ import axios from 'axios';
 import jsonp from 'jsonp';
 import myAxios from './myAxios.js';
 import {BASE_URL} from '../config/index.js';
-
+// 登录
 export const reqLogin = (username, password) => myAxios.post(`${BASE_URL}/login`, {username, password});
-export const reqCategoryList = () => myAxios.get(`${BASE_URL}/manage/category/list`);
+// 位置 jsonp
 export const reqLocal = () => {
     return new Promise((resolve, reject) => {
         jsonp('http://whois.pconline.com.cn/ipJson.jsp?jsonp=true', (err, data) => {
@@ -17,5 +17,21 @@ export const reqLocal = () => {
         })
     })
 };
-
+// 天气
 export const reqWeather = (place) => axios.get(`http://wthrcdn.etouch.cn/weather_mini?city=${place}`);
+// 分类列表
+export const reqCategoryList = () => myAxios.get(`${BASE_URL}/manage/category/list`);
+// 添加分类
+export const reqAddCategory = (categoryName) => myAxios.post(`${BASE_URL}/manage/category/add`, {categoryName});
+// 修改分类
+export const reqUpdateCategory = (categoryId, categoryName) => myAxios.post(`${BASE_URL}/manage/category/update`, {categoryId, categoryName});
+// 获取商品
+export const reqProductList = (pageNum, pageSize) => myAxios.get(`${BASE_URL}/manage/product/list`, {params:{pageNum, pageSize}});
+// 更新商品状态上架，下架 status是要更新的状态
+export const reqUpdateProductState = (productId, status) => myAxios.post(`${BASE_URL}/manage/product/updateStatus`, {productId, status});
+// 搜索特定商品列表
+export const reqSearchProductList = (pageNum,pageSize,searchType,keyWord) => myAxios.get(`${BASE_URL}/manage/product/search`, {params:{pageNum, pageSize, [searchType]:keyWord}});
+// 根据商品id获取商品详细
+export const reqProductDetail = (productId) => myAxios.get(`${BASE_URL}/manage/product/info`, {params:{productId}});
+// 根据分类id获取商品分类
+export const reqProductCategory = (categoryId) => myAxios.get(`${BASE_URL}/manage/category/info`, {params:{categoryId}});

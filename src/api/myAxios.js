@@ -67,7 +67,6 @@ myAxios.interceptors.response.use(function (response) {
         store.dispatch(deleteUserInfoAction());
 
     }else{
-        
         message.error(error.message);
     }
     // debugger;

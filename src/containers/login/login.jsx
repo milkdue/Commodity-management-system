@@ -6,7 +6,7 @@ import { Form, Input, Button, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {createUserInfoAction} from '../../redux/actions/create_or_delete_user_info_action.js';
 import {reqLogin} from '../../api/index.js'
-import logo from './imgs/logo.png';
+import logo from '../../static/imgs/logo.png';
 import './css/login.less';
 
 
@@ -51,7 +51,7 @@ class Login extends Component{
             message.warning(element.errors, 1);
         });
     }
-
+    // 自定义校验规则
     pwdValidator = (rule, value, callback) => {
         /*
         密码合法性
