@@ -265,4 +265,27 @@
 
 ## 添加商品
 
-1. 页面
+1. 静态页面
+2. <http://localhost:5000/manage/product/add>
+3. post
+
+## 上传图片
+
+1. <http://localhost:5000/manage/img/upload>
+2. post
+
+## 删除图片
+
+1. <http://localhost:5000/manage/img/delete>
+2. post
+
+## 修改商品
+
+1. 复用组件
+2. 数据回显
+3. <http://localhost:5000/manage/product/update>
+4. post
+
+## 角色管理
+
+1. 

@@ -41,3 +41,7 @@ export const reqRemovePhoto = (name) => myAxios.post(`${BASE_URL}/manage/img/del
 export const reqAddProduct = (obj) => myAxios.post(`${BASE_URL}/manage/product/add`, {...obj});
 // 请求修改商品
 export const reqUpdateProduct = (obj) => myAxios.post(`${BASE_URL}/manage/product/update`, {...obj});
+// 请求添加角色
+export const reqAddRole = (roleName) => myAxios.post(`${BASE_URL}/manage/role/add`, {roleName});
+// 请求角色列表
+export const reqRoleList = () => myAxios.get(`${BASE_URL}/manage/role/list`);

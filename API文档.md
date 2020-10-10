@@ -75,7 +75,7 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 ### 返回示例
 
 ```json
-成功
+//成功
 {
   "status": 0,
   "data": {
@@ -90,7 +90,7 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzcxNWMwNzI4YzM1MDcwYzYwNDAwMyIsImlhdCI6MTYwMTgxMDAxMiwiZXhwIjoxNjAyNDE0ODEyfQ.LOmpDQyD3nHKTAsiDin_reeO8xhdFWj0C72fZ0tjeCM"
 }
 
-失败
+//失败
 {
     "status": 1,
     "msg": "用户名或密码不正确!"
@@ -332,10 +332,13 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 |categoryId    |Y   |string   |分类的ID|
 |categoryName  |Y   |string   |名称|
 
-### 返回示例：
-    {
-      "status": 0
-    }
+### 更新分类返回示例
+
+```json
+{
+    "status": 0
+}
+```
 
 ## 9. 根据分类ID获取分类
 
@@ -643,9 +646,12 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 |imgs          |N       |array   |商品图片名数组|
 
 ### 更新商品返回示例
-    {
-      "status": 0
-    }
+
+```json
+{
+    "status": 0
+}
+```
 
 ## 15. 对商品进行上架/下架处理
 
@@ -712,9 +718,9 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 
 ### 删除图片参数类型
 
-|参数|是否必选 |类型     |说明|
-|:--:|:------:|:--:|:---:|
-|name    |Y       |string   |图片文件名|
+|参数|是否必选 |类型  |说明      |
+|:--:|:------:|:----:|:-------:|
+|name|Y       |string|图片文件名|
 
 ### 删除图片返回示例
 
@@ -726,215 +732,255 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 
 ## 18. 添加角色
 
-### 请求URL：
-    http://localhost:5000/manage/role/add
+### 添加角色请求URL
 
-### 请求方式：
-    POST
+> <http://localhost:5000/manage/role/add>
 
-### 参数类型:
-    |参数		     |是否必选 |类型     |说明
-    |roleName    |Y       |string   |角色名称
+### 添加角色请求方式
 
-### 返回示例：
-    {
-        "status": 0,
-        "data": {
-            "menus": [],
-            "_id": "5cf39a319929a304dcc0c6ec",
-            "name": "角色x",
-            "create_time": 1559468593702,
-            "__v": 0
-        }
+> POST
+
+### 添加角色参数类型
+
+|参数        |是否必选 |类型      |说明   |
+|:----------:|:------:|:-------:|:-----:|
+|roleName    |Y       |string   |角色名称|
+
+### 添加角色返回示例
+
+```json
+{
+    "status": 0,
+    "data": {
+        "menus": [],
+        "_id": "5cf39a319929a304dcc0c6ec",
+        "name": "角色x",
+        "create_time": 1559468593702,
+        "__v": 0
     }
+}
+```
 
 ## 19. 获取角色列表
-### 请求URL：
-    http://localhost:5000/manage/role/list
 
-### 请求方式：
-    GET
+### 获取角色列表请求URL
 
-### 参数类型: 
-    无
+> <http://localhost:5000/manage/role/list>
 
-### 返回示例：
-    {
-        "status": 0,
-        "data": [
-            {
-                "menus": [
-                    "/role",
-                    "/charts/bar",
-                    "/home",
-                    "/category"
-                ],
-                "_id": "5ca9eaa1b49ef916541160d3",
-                "name": "测试",
-                "create_time": 1554639521749,
-                "__v": 0,
-                "auth_time": 1558679920395,
-                "auth_name": "test007"
-            },
-            {
-                "menus": [
-                    "/role",
-                    "/charts/bar",
-                    "/home",
-                    "/charts/line",
-                    "/category",
-                    "/product",
-                    "/products"
-                ],
-                "_id": "5ca9eab0b49ef916541160d4",
-                "name": "经理",
-                "create_time": 1554639536419,
-                "__v": 0,
-                "auth_time": 1558506990798,
-                "auth_name": "test008"
-            },
-            {
-                "menus": [
-                    "/home",
-                    "/products",
-                    "/category",
-                    "/product",
-                    "/role"
-                ],
-                "_id": "5ca9eac0b49ef916541160d5",
-                "name": "角色1",
-                "create_time": 1554639552758,
-                "__v": 0,
-                "auth_time": 1557630307021,
-                "auth_name": "admin"
-            }
-        ]
-    }
+### 获取角色列表请求方式
 
-## 20. 更新角色(给角色设置权限)
-### 请求URL：
-    http://localhost:5000/manage/role/update
+> GET
 
-### 请求方式：
-    POST
+### 获取角色列表参数类型:
 
-### 参数类型:
-  
-    |参数		     |是否必选  |类型     |说明
-    |_id          |Y       |string   |角色ID
-    |menus        |Y       |array    |权限key数组
-    |auth_time    |Y       |number   |权限时间
-    |auth_name    |Y       |string   |权限人姓名
+> 无
 
-### 返回示例：
-    {
-        "status": 0,
-        "data": {
+### 获取角色列表返回示例
+
+```json
+{
+    "status": 0,
+    "data": [
+        {
             "menus": [
                 "/role",
                 "/charts/bar",
                 "/home",
-                "/category",
-                "/user"
+                "/category"
             ],
             "_id": "5ca9eaa1b49ef916541160d3",
             "name": "测试",
             "create_time": 1554639521749,
             "__v": 0,
-            "auth_time": 1559469116470,
+            "auth_time": 1558679920395,
+            "auth_name": "test007"
+        },
+        {
+            "menus": [
+                "/role",
+                "/charts/bar",
+                "/home",
+                "/charts/line",
+                "/category",
+                "/product",
+                "/products"
+            ],
+            "_id": "5ca9eab0b49ef916541160d4",
+            "name": "经理",
+            "create_time": 1554639536419,
+            "__v": 0,
+            "auth_time": 1558506990798,
+            "auth_name": "test008"
+        },
+        {
+            "menus": [
+                "/home",
+                "/products",
+                "/category",
+                "/product",
+                "/role"
+            ],
+            "_id": "5ca9eac0b49ef916541160d5",
+            "name": "角色1",
+            "create_time": 1554639552758,
+            "__v": 0,
+            "auth_time": 1557630307021,
             "auth_name": "admin"
         }
+    ]
+}
+```
+
+## 20. 更新角色(给角色设置权限)
+
+### 更新角色请求URL
+
+> <http://localhost:5000/manage/role/update>
+
+### 更新角色请求方式
+
+> POST
+
+### 更新角色参数类型
+  
+|参数         |是否必选 |类型      |说明      |
+|:-----------:|:------:|:-------:|:--------:|
+|_id          |Y       |string   |角色ID    |
+|menus        |Y       |array    |权限key数组|
+|auth_time    |Y       |number   |权限时间   |
+|auth_name    |Y       |string   |权限人姓名 |
+
+### 更新角色返回示例
+
+```json
+{
+    "status": 0,
+    "data": {
+        "menus": [
+            "/role",
+            "/charts/bar",
+            "/home",
+            "/category",
+            "/user"
+        ],
+        "_id": "5ca9eaa1b49ef916541160d3",
+        "name": "测试",
+        "create_time": 1554639521749,
+        "__v": 0,
+        "auth_time": 1559469116470,
+        "auth_name": "admin"
     }
+}
+```
 
-## 21. 获取天气信息(支持jsonp)
-### 请求URL：
-    http://api.map.baidu.com/telematics/v3/weather
-    http://api.map.baidu.com/telematics/v3/weather?location=xxx&output=json&ak=3p49MVra6urFRGOT9s8UBWr2
+## 21. 获取天气信息
 
-### 请求方式：
-    GET
+### 获取天气信息请求URL
 
-### 参数类型:
-    |参数		     |是否必选 |类型     |说明
-    |location    |Y       |string   |城市名称
-    |output      |Y       |string   |返回数据格式: json
-    |ak          |Y       |string   |唯一的应用key(3p49MVra6urFRGOT9s8UBWr2)
+> <http://wthrcdn.etouch.cn/weather_mini?city=北京>
 
-### 返回示例：
-    {
-      "error": 0,
-      "status": "success",
-      "date": "2019-06-02",
-      "results": [
-        {
-          "currentCity": "北京",
-          "pm25": "119",
-          "index": [
+### 获取天气信息请求方式
+
+> GET
+
+### 获取天气信息参数类型
+
+|参数        |是否必选 |类型      |说明      |
+|:----------:|:------:|:-------:|:--------:|
+|city        |Y       |string   |城市名称   |
+
+### 获取天气信息返回示例
+
+```json
+{
+    "data": {
+        "yesterday": {
+            "date": "9日星期五",
+            "high": "高温 21℃",
+            "fx": "南风",
+            "low": "低温 10℃",
+            "fl": "<![CDATA[1级]]>",
+            "type": "霾"
+        },
+        "city": "北京",
+        "forecast": [
             {
-              "des": "建议着长袖T恤、衬衫加单裤等服装。年老体弱者宜着针织长袖衬衫、马甲和长裤。",
-              "tipt": "穿衣指数",
-              "title": "穿衣",
-              "zs": "舒适"
+                "date": "10日星期六",
+                "high": "高温 23℃",
+                "fengli": "<![CDATA[2级]]>",
+                "low": "低温 15℃",
+                "fengxiang": "南风",
+                "type": "霾"
             },
             {
-              "des": "不宜洗车，未来24小时内有雨，如果在此期间洗车，雨水和路上的泥水可能会再次弄脏您的爱车。",
-              "tipt": "洗车指数",
-              "title": "洗车",
-              "zs": "不宜"
+                "date": "11日星期天",
+                "high": "高温 18℃",
+                "fengli": "<![CDATA[3级]]>",
+                "low": "低温 7℃",
+                "fengxiang": "北风",
+                "type": "阴"
             },
             {
-              "des": "各项气象条件适宜，无明显降温过程，发生感冒机率较低。",
-              "tipt": "感冒指数",
-              "title": "感冒",
-              "zs": "少发"
+                "date": "12日星期一",
+                "high": "高温 18℃",
+                "fengli": "<![CDATA[2级]]>",
+                "low": "低温 6℃",
+                "fengxiang": "西风",
+                "type": "多云"
             },
             {
-              "des": "天气较好，赶快投身大自然参与户外运动，尽情感受运动的快乐吧。",
-              "tipt": "运动指数",
-              "title": "运动",
-              "zs": "适宜"
+                "date": "13日星期二",
+                "high": "高温 19℃",
+                "fengli": "<![CDATA[2级]]>",
+                "low": "低温 6℃",
+                "fengxiang": "北风",
+                "type": "多云"
             },
             {
-              "des": "紫外线强度较弱，建议出门前涂擦SPF在12-15之间、PA+的防晒护肤品。",
-              "tipt": "紫外线强度指数",
-              "title": "紫外线强度",
-              "zs": "弱"
+                "date": "14日星期三",
+                "high": "高温 14℃",
+                "fengli": "<![CDATA[2级]]>",
+                "low": "低温 5℃",
+                "fengxiang": "东南风",
+                "type": "晴"
             }
-          ],
-          "weather_data": [
-            {
-              "date": "周日 06月02日 (实时：30℃)",
-              "dayPictureUrl": "http://api.map.baidu.com/images/weather/day/duoyun.png",
-              "nightPictureUrl": "http://api.map.baidu.com/images/weather/night/leizhenyu.png",
-              "weather": "多云转雷阵雨",
-              "wind": "西南风3-4级",
-              "temperature": "31 ~ 20℃"
-            },
-            {
-              "date": "周一",
-              "dayPictureUrl": "http://api.map.baidu.com/images/weather/day/duoyun.png",
-              "nightPictureUrl": "http://api.map.baidu.com/images/weather/night/duoyun.png",
-              "weather": "多云",
-              "wind": "南风微风",
-              "temperature": "34 ~ 20℃"
-            },
-            {
-              "date": "周二",
-              "dayPictureUrl": "http://api.map.baidu.com/images/weather/day/leizhenyu.png",
-              "nightPictureUrl": "http://api.map.baidu.com/images/weather/night/leizhenyu.png",
-              "weather": "雷阵雨",
-              "wind": "东风微风",
-              "temperature": "28 ~ 21℃"
-            },
-            {
-              "date": "周三",
-              "dayPictureUrl": "http://api.map.baidu.com/images/weather/day/duoyun.png",
-              "nightPictureUrl": "http://api.map.baidu.com/images/weather/night/duoyun.png",
-              "weather": "多云",
-              "wind": "北风3-4级",
-              "temperature": "33 ~ 19℃"
-            }
-          ]
-        }
-      ]
+        ],
+        "ganmao": "感冒低发期，天气舒适，请注意多吃蔬菜水果，多喝水哦。",
+        "wendu": "19"
     }
+}
+```
+
+## 22. 获取位置信息(支持jsonp)
+
+### 获取位置请求地址
+
+> <http://whois.pconline.com.cn/ipJson.jsp>
+
+### 获取位置请求方式
+
+> get
+
+### 获取位置请求方式参数类型
+
+|参数        |是否必选 |类型      |说明      |
+|:----------:|:------:|:-------:|:--------:|
+|jsonp       |N       |bool     |默认jsonp  |
+|json        |N       |bool     |json      |
+
+### 获取位置返回示例
+
+```json
+{
+    "ip": "42.49.109.146",
+    "pro": "北京市",
+    "proCode": "43xxxx",
+    "city": "北京市",
+    "cityCode": "4343xx",
+    "region": "",
+    "regionCode": "0",
+    "addr": "北京市 联通",
+    "regionNames": "",
+    "err": ""
+}
+```

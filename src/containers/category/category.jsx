@@ -16,12 +16,10 @@ export default class Category extends Component{
         modalName: ''
     };
 
-    myRef = React.createRef()
-
     componentDidMount(){
       this.getCategoryList();
     }
-    // 数据回显 必须使用该钩子 当状态改变的时候自动调用该方法 myRef在showUpdate中无法取到setFieldsvalue方法
+    // 数据回显 必须使用该钩子 当状态改变的时候自动调用该方法 this.formRef在showUpdate中无法取到setFieldsvalue方法
     componentDidUpdate() {
       
       if (this.formRef) {
@@ -89,7 +87,7 @@ export default class Category extends Component{
         visible: false,
         category: newcategory
       });
-      this.myRef.current.resetFields();//重置表单
+      this.formRef.resetFields();//重置表单
     }
     // 修改分类
     updataCategory = async (value) => {
@@ -105,7 +103,7 @@ export default class Category extends Component{
           this.setState({
             visible: false
           });
-          this.myRef.current.resetFields();//重置表单
+          this.formRef.resetFields();//重置表单
           this.getCategoryList();// 重新获取列表
         }else{
           message.error('修改失败，请重试!', 1);
@@ -115,7 +113,7 @@ export default class Category extends Component{
     // 点击确定
     handleOk = () => {
         // 表单验证
-      this.myRef.current.validateFields()
+        this.formRef.validateFields()
         .then(value => {
           // 判断类型
           if(this.state.type === 'add') this.addCategory(value.categoryname);
