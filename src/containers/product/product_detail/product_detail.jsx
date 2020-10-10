@@ -74,7 +74,7 @@ class ProductDetail extends Component {
                     </List.Item>
                     <List.Item style={{justifyContent: 'flex-start'}}>
                         <span className="title">商品图片:{
-                            imgs ? imgs.map((item, index) => (<img src={BASE_URL + '/upload/' + item} alt="商品图片" key={index}></img>)) : <LoadingOutlined/>
+                            imgs ? imgs.map((item, index) => (<img src={BASE_URL + '/upload/' + item} alt="商品图片" key={index} style={{width:'200px'}}></img>)) : <LoadingOutlined/>
                         }</span>
                     </List.Item>
                     <List.Item style={{justifyContent: 'flex-start'}}>

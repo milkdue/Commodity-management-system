@@ -39,3 +39,5 @@ export const reqProductCategory = (categoryId) => myAxios.get(`${BASE_URL}/manag
 export const reqRemovePhoto = (name) => myAxios.post(`${BASE_URL}/manage/img/delete`, {name});
 // 添加商品
 export const reqAddProduct = (obj) => myAxios.post(`${BASE_URL}/manage/product/add`, {...obj});
+// 请求修改商品
+export const reqUpdateProduct = (obj) => myAxios.post(`${BASE_URL}/manage/product/update`, {...obj});

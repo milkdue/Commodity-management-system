@@ -23,11 +23,12 @@ export default class Category extends Component{
     }
     // 数据回显 必须使用该钩子 当状态改变的时候自动调用该方法 myRef在showUpdate中无法取到setFieldsvalue方法
     componentDidUpdate() {
-          if (this.myRef.current) {
-            this.myRef.current.setFieldsValue({
-              categoryname: this.state.modalName
-            })
-          }
+      
+      if (this.formRef) {
+        this.formRef.setFieldsValue({
+          categoryname: this.state.modalName
+        })
+      }
     }
 
     // 获取分类列表
@@ -113,17 +114,18 @@ export default class Category extends Component{
     }
     // 点击确定
     handleOk = () => {
-        this.myRef.current.validateFields()
-          .then(value => {
-            // 判断类型
-            if(this.state.type === 'add') this.addCategory(value.categoryname);
-            if(this.state.type === 'update') this.updataCategory(value);
-          })
-          .catch(error => message.error(error.message, 1))
+        // 表单验证
+      this.myRef.current.validateFields()
+        .then(value => {
+          // 判断类型
+          if(this.state.type === 'add') this.addCategory(value.categoryname);
+          if(this.state.type === 'update') this.updataCategory(value);
+        })
+        .catch(error => message.error(error.message, 1))
     };
     // 点击取消
     handleCancel = () => {
-        this.myRef.current.resetFields();//重置表单
+      this.formRef.resetFields();//重置表单
         this.setState({
           visible: false,
           modalName: ''
@@ -182,7 +184,7 @@ export default class Category extends Component{
                     <Form 
                             name="normal_login" 
                             className="login-form" 
-                            ref={this.myRef}
+                            ref={(form) => {this.formRef = form}}
                         >
                         <Form.Item
                             name="categoryname"

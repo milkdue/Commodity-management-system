@@ -621,23 +621,28 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 ```
 
 ## 14. 更新商品
-### 请求URL：
-    http://localhost:5000/manage/product/update
 
-### 请求方式：
-    POST
+### 更新商品请求URL
 
-### 参数类型:
-    |参数		       |是否必选 |类型     |说明
-    |_id           |Y       |string   |商品ID
-    |categoryId    |Y       |string   |分类ID
-    |name          |Y       |string   |商品名称
-    |desc          |N       |string   |商品描述
-    |price         |N       |string   |商品价格
-    |detail        |N       |string   |商品详情
-    |imgs          |N       |array   |商品图片名数组
+> <http://localhost:5000/manage/product/update>
 
-### 返回示例：
+### 更新商品请求方式
+
+> POST
+
+### 更新商品参数类型
+
+|参数           |是否必选 |类型     |说明|
+|:------------:|:------:|:-------:|:----:|
+|_id           |Y       |string   |商品ID|
+|categoryId    |Y       |string   |分类ID|
+|name          |Y       |string   |商品名称|
+|desc          |N       |string   |商品描述|
+|price         |N       |string   |商品价格|
+|detail        |N       |string   |商品详情|
+|imgs          |N       |array   |商品图片名数组|
+
+### 更新商品返回示例
     {
       "status": 0
     }

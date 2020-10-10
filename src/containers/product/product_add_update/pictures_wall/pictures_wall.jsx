@@ -20,6 +20,12 @@ export default class PicturesWall extends React.Component {
     previewTitle: '',// 图片的name
     fileList: []// 图片列表
   };
+
+  setFileList = (imgs) => {
+    let fileList = [];
+    imgs.forEach((item, index) => {fileList.push({uid: -index, name: '商品图片', url: BASE_URL + '/upload/' + item})});
+    this.setState({fileList});
+  }
   // 取消回调
   handleCancel = () => {this.setState({ previewVisible: false })};
   // 预览回调
@@ -41,6 +47,7 @@ export default class PicturesWall extends React.Component {
     if(file.status === 'done'){
       // console.log(file)
       message.success('上传成功!', 1);
+      fileList[fileList.length - 1].name = '商品图片';
       fileList[fileList.length - 1].url = BASE_URL + '/upload/' + file.response.data.name;
       fileList[fileList.length - 1].uid = file.response.data.name;
       this.setState({fileList});

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {EditorState, convertToRaw} from 'draft-js';
+import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import {Editor} from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
@@ -16,6 +17,17 @@ export default class TextEditor extends Component {
       editorState,
     });
   };
+  // 设置文本
+  setText = (html)=>{
+    const contentBlock = htmlToDraft(html);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      const editorState = EditorState.createWithContent(contentState);
+      this.setState({
+        editorState,
+      });
+    }
+  }
 
   getText = () => {
     const {editorState} = this.state;
@@ -34,7 +46,7 @@ export default class TextEditor extends Component {
           editorStyle={{
             border:' 1px solid black',
             paddingLeft:'10px',
-            lineHeight: '10px',
+            lineHeight: '20px',
             minHeight: '190px'
           }}
             //   文本框改变回调
