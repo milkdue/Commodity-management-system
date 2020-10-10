@@ -49,3 +49,5 @@ export const reqRoleList = () => myAxios.get(`${BASE_URL}/manage/role/list`);
 export const reqAuthRole = (obj) => myAxios.post(`${BASE_URL}/manage/role/update`, {...obj, auth_time: Date.now()});
 // 请求用户列表
 export const reqUserList = () => myAxios.get(`${BASE_URL}/manage/user/list`);
+// 添加一个用户
+export const reqAddUser = (obj) => myAxios.post(`${BASE_URL}/manage/user/add`, {...obj, auth_time: Date.now()});

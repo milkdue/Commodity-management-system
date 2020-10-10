@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Card, Button, Table} from 'antd';
 import {UserAddOutlined} from '@ant-design/icons';
+import dayjs from 'dayjs';
 import {reqUserList} from '../../api/index.js';
 
 
@@ -10,7 +11,7 @@ export default class User extends Component{
     }
 
     componentDidMount(){
-
+        this.getUserList()
     }
 
     getUserList = async () => {
@@ -36,33 +37,47 @@ export default class User extends Component{
         const columns = [
             {
                 title: '用户名',
-                dataIndex: 'name',
-                key: 'name',
+                dataIndex: 'username',
+                align: 'center',
+                key: 'username',
             },
             {
                 title: '邮箱',
-                dataIndex: 'age',
-                key: 'age',
+                dataIndex: 'email',
+                align: 'center',
+                key: 'email',
             },
             {
                 title: '电话',
-                dataIndex: 'address',
-                key: 'address',
+                dataIndex: 'phone',
+                align: 'center',
+                key: 'phone',
             },
             {
                 title: '注册时间',
-                dataIndex: 'address',
-                key: 'address',
+                dataIndex: 'create_time',
+                align: 'center',
+                key: 'create_time',
+                render: (time) => dayjs(time).format('YYYY-MM-DD HH:mm:ss')
             },
             {
                 title: '所属角色',
-                dataIndex: 'address',
-                key: 'address',
+                dataIndex: 'role_id',
+                align: 'center',
+                key: 'role_id',
             },
             {
                 title: '操作',
-                dataIndex: 'address',
-                key: 'address',
+                key: 'operation',
+                align: 'center',
+                render: () => {
+                    return (
+                        <div>
+                            <Button type="link">修改</Button>
+                            <Button type="link">删除</Button>
+                        </div>
+                    )
+                }
             },
         ];
         const {isLoading} = this.state;

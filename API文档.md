@@ -111,35 +111,40 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 
 ### 请求添加用户方式
 
-	POST
+> POST
 
-### 参数类型
-	|参数		|是否必选 |类型     |说明
-	|username    |Y       |string   |用户名
-	|password    |Y       |string   |密码
-	|phone       |N       |string   |手机号
-	|email       |N       |string   |邮箱
-	|role_id     |N       |string   |角色ID
+### 添加用户参数类型
 
-### 返回示例：
-	成功:
-	  {
-        "status": 0,
-        "data": {
-          "_id": "5c3b382c82a14446f4ffb647",
-          "username": "admin6",
-          "password": "d7b79bb6d6f77e6cbb5df2d0d2478361",
-          "phone": "13712341234",
-          "email": "test@qq.com",
-          "create_time": 1547384876804,
-          "__v": 0
-        }
-      }
-	失败
-	  {
-        "status": 1,
-        "msg": "此用户已存在"
-      }
+|参数        |是否必选  |类型     |说明 |
+|:----------:|:------:|:-------:|:---:|
+|username    |Y       |string   |用户名|
+|password    |Y       |string   |密码  |
+|phone       |N       |string   |手机号|
+|email       |N       |string   |邮箱  |
+|role_id     |N       |string   |角色ID|
+
+### 添加用户返回示例：
+
+```json
+//成功
+{
+    "status": 0,
+    "data": {
+        "_id": "5c3b382c82a14446f4ffb647",
+        "username": "admin6",
+        "password": "d7b79bb6d6f77e6cbb5df2d0d2478361",
+        "phone": "13712341234",
+        "email": "test@qq.com",
+        "create_time": 1547384876804,
+        "__v": 0
+    }
+}
+//失败
+{
+    "status": 1,
+    "msg": "此用户已存在"
+}
+```
 
 ## 3. 更新用户
 ### 请求URL：

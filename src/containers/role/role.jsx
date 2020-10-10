@@ -5,6 +5,7 @@ import {PlusSquareOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import {reqAddRole, reqRoleList, reqAuthRole} from '../../api/index.js';
 import menuList from '../../config/menu-config.js';
+import {PAGE_SIZE} from '../../config/index.js';
 
 @connect(
     state => ({username: state.userInfo.user.username}),
@@ -185,7 +186,7 @@ class Role extends Component{
                     </Form>
                 </Modal>
                 <Card title={<Button onClick={this.showAddRole} type="primary"><PlusSquareOutlined />新增角色</Button>}>
-                    <Table dataSource={roleList} columns={columns} bordered rowKey="_id" loading={isLoading}/>
+                    <Table dataSource={roleList} columns={columns} bordered rowKey="_id" loading={isLoading} pagination={{pageSize: PAGE_SIZE, showQuickJumper: true}}/>
                 </Card>
                 <Modal
                     title="权限设置"
