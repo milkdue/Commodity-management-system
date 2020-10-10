@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Form, Input, Button, Card, message, Select} from 'antd';
+import {connect} from 'react-redux';
 import {LeftSquareOutlined} from '@ant-design/icons';
 import {reqCategoryList, reqAddProduct} from '../../../api/index.js';
 import PicturesWall from './pictures_wall/pictures_wall.jsx';
@@ -7,15 +8,29 @@ import TextEditor from './text_editor/text_editor.jsx';
 import './css/product_add.less';
 const {Option} = Select;
 
-export default class ProductAddUpdate extends Component {
+
+@connect(
+    state => ({}),
+    {}
+)
+class ProductAddUpdate extends Component {
 
     state = {
-        categoryList: []
+        categoryList: [], // 获取商品列表
+        type: 'add', // 判断是否修改或者添加商品
+        name: '', // 回显数据的商品名称
+        desc: '', //回显数据的描述
+        price: '',// 回显数据的价格
+        categoryId: '', // 回显商品的分类
     }
 
     componentDidMount(){
+        // 获取id
+        const {id} = this.props.match.params;
+        if(id){
+            this.setState({type: 'update'});
+        }
         this.getCategoryList();
-        // console.log(categoryList)
     }
     // 获取分类列表
     getCategoryList = async () => {
@@ -41,9 +56,9 @@ export default class ProductAddUpdate extends Component {
         }
     }
     render() {
-        const {categoryList} = this.state;
+        const {categoryList, type} = this.state;
         return (
-            <Card title={<Button type="link" className="go-back" onClick={() => {this.props.history.goBack()}}><LeftSquareOutlined className="back-icon"/>商品添加</Button>}>
+            <Card title={<Button type="link" className="go-back" onClick={() => {this.props.history.goBack()}}><LeftSquareOutlined className="back-icon"/>{type === 'add' ? '商品添加' : '商品修改'}</Button>}>
                 <Form 
                     labelCol={{xl: 2, md: 5, sm: 8, xs: 12}}
                     wrapperCol={{xl: 8, md: 12, sm: 16, xs: 20}}
@@ -146,3 +161,4 @@ export default class ProductAddUpdate extends Component {
     }
 }
 
+export default ProductAddUpdate;
