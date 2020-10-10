@@ -43,7 +43,8 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 18. 添加角色
 19. 获取角色列表
 20. 更新角色(给角色设置权限)
-21. 获取天气信息(支持jsonp)
+21. 获取天气信息
+22. 获取位置信息(支持jsonp)
 
 ------------------------------------------------------------
 
@@ -177,61 +178,68 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
       }
     
 ## 4. 获取所有用户列表
-### 请求URL：
-	http://localhost:5000/manage/user/list
 
-### 请求方式：
-	GET
+### 获取所有用户列表请求URL
 
-### 参数类型: 
-	无
+> <http://localhost:5000/manage/user/list>
 
-### 返回示例：
-    {
-	  "status": 0,
-	  "data": {
-	    "users": [
-	      {
-	        "_id": "5cb05b4db6ed8c44f42c9af2",
-	        "username": "test",
-	        "password": "202cb962ac59075b964b07152d234b70",
-	        "phone": "123412342134",
-	        "email": "sd",
-	        "role_id": "5ca9eab0b49ef916541160d4",
-	        "create_time": 1555061581734,
-	        "__v": 0
-	      },
-	      {
-	        "_id": "5cb05b69b6ed8c44f42c9af3",
-	        "username": "ss22",
-	        "password": "123",
-	        "phone": "23343",
-	        "email": "df",
-	        "role_id": "5caf5444c61376319cef80a8",
-	        "create_time": 1555061609666,
-	        "__v": 0
-	      }
-	    ],
-	    "roles": [
-	      {
-	        "menus": [
-	          "/home",
-	          "/role",
-	          "/category",
-	          "/products",
-	          "/product",
-	          "/charts/bar"
-	        ],
-	        "_id": "5ca9eaa1b49ef916541160d3",
-	        "name": "测试",
-	        "create_time": 1554639521749,
-	        "__v": 0,
-	        "auth_time": 1555145863489,
-	        "auth_name": "admin"
-	      }
-	    ]
-	  }
-	}
+### 获取所有用户列表请求方式
+
+> GET
+
+### 获取所有用户列表参数类型:
+
+> 无
+
+### 获取所有用户列表返回示例
+
+```json
+{
+    "status": 0,
+    "data": {
+    "users": [
+        {
+        "_id": "5cb05b4db6ed8c44f42c9af2",
+        "username": "test",
+        "password": "202cb962ac59075b964b07152d234b70",
+        "phone": "123412342134",
+        "email": "sd",
+        "role_id": "5ca9eab0b49ef916541160d4",
+        "create_time": 1555061581734,
+        "__v": 0
+        },
+        {
+        "_id": "5cb05b69b6ed8c44f42c9af3",
+        "username": "ss22",
+        "password": "123",
+        "phone": "23343",
+        "email": "df",
+        "role_id": "5caf5444c61376319cef80a8",
+        "create_time": 1555061609666,
+        "__v": 0
+        }
+    ],
+    "roles": [
+        {
+        "menus": [
+            "/home",
+            "/role",
+            "/category",
+            "/products",
+            "/product",
+            "/charts/bar"
+        ],
+        "_id": "5ca9eaa1b49ef916541160d3",
+        "name": "测试",
+        "create_time": 1554639521749,
+        "__v": 0,
+        "auth_time": 1555145863489,
+        "auth_name": "admin"
+        }
+    ]
+    }
+}
+```
 
 ## 5. 删除用户
 ### 请求URL：

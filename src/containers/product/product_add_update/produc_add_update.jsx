@@ -91,12 +91,13 @@ class ProductAddUpdate extends Component {
                 message.success('添加成功!', 1);
                 this.props.history.replace('/admin/production/product');
             }else{
-                message.error('添加失败,请重试!', 1);
+                message.error(result.msg + '!', 1);
             }
         }else{
             result = await reqUpdateProduct({...values, imgs, detail, _id});
             if(result.status === 0){
                 message.success('修改成功!', 1);
+                // 服务器未作去重
                 this.props.history.replace('/admin/production/product');
             }else{
                 message.warning('修改失败, 请刷新后重试!', 1);

@@ -76,7 +76,7 @@ export default class Category extends Component{
     addCategory = async (value) => {
       let result = await reqAddCategory(value);
       if(result.status !== 0){
-        message.error('添加失败，请重试!', 1);
+        message.error(result.msg + '!', 1);
         return;
       }
       let {data} = result;
@@ -96,7 +96,7 @@ export default class Category extends Component{
       })
 
       if(resultIsExist){
-        message.warning('此分类以存在')
+        message.warning('此分类以存在');
       }else{
         let result = await reqUpdateCategory(this.state.modalId, value.categoryname);
         if(result.status === 0){
