@@ -579,38 +579,46 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 ```
 
 ## 13. 添加商品
-### 请求URL：
-    http://localhost:5000/manage/product/add
 
-### 请求方式：
-    POST
+### 添加商品请求URL
 
-### 参数类型:
-    |参数		       |是否必选 |类型     |说明
-    |categoryId    |Y       |string   |分类ID
-    |name          |Y       |string   |商品名称
-    |desc          |N       |string   |商品描述
-    |price         |N       |string   |商品价格
-    |detail        |N       |string   |商品详情
-    |imgs          |N       |array   |商品图片名数组
+> <http://localhost:5000/manage/product/add>
 
-### 返回示例：
-    {
-        "status": 0,
-        "data": {
-            "status": 1,
-            "imgs": [
-                "image-1559467198366.jpg"
-            ],
-            "_id": "5cf394d29929a304dcc0c6eb",
-            "name": "商品A",
-            "desc": "一个笔记本",
-            "price": 11111,
-            "detail": "<p><strong>abc</strong></p>\n",
-            "categoryId": "5ca9db78b49ef916541160ca",
-            "__v": 0
-        }
+### 添加商品请求方式
+
+> POST
+
+### 添加商品参数类型
+
+|参数           |是否必选 |类型     |说明|
+|:------------:|:------:|:-------:|:----:|
+|categoryId    |Y       |string   |分类ID|
+|name          |Y       |string   |商品名称|
+|desc          |N       |string   |商品描述|
+|price         |N       |string   |商品价格|
+|detail        |N       |string   |商品详情|
+|imgs          |N       |array   |商品图片名数组|
+
+### 添加商品返回示例
+
+```json
+{
+    "status": 0,
+    "data": {
+        "status": 1,
+        "imgs": [
+            "image-1559467198366.jpg"
+        ],
+        "_id": "5cf394d29929a304dcc0c6eb",
+        "name": "商品A",
+        "desc": "一个笔记本",
+        "price": 11111,
+        "detail": "<p><strong>abc</strong></p>\n",
+        "categoryId": "5ca9db78b49ef916541160ca",
+        "__v": 0
     }
+}
+```
 
 ## 14. 更新商品
 ### 请求URL：
@@ -660,42 +668,56 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 ```
 
 ## 16. 上传图片
-### 请求URL：
-    http://localhost:5000/manage/img/upload
 
-### 请求方式：
-    POST
+### 上传图片请求URL
 
-### 参数类型:
+> <http://localhost:5000/manage/img/upload>
 
-    |参数		|是否必选 |类型     |说明
-    |image  |Y       |文件   |图片文件
+### 上传图片请求方式
 
-### 返回示例：
-    {
-        "status": 0,
-        "data": {
-            "name": "image-1559466841118.jpg",
-            "url": "http://localhost:5000/upload/image-1559466841118.jpg"
-        }
+> POST
+
+### 上传图片参数类型
+
+|参数|是否必选 |类型     |说明|
+|:--:|:------:|:--:|:---:|
+|image  |Y       |文件   |图片文件|
+
+### 上传图片返回示例
+
+```json
+{
+    "status": 0,
+    "data": {
+        "name": "image-1559466841118.jpg",
+        "url": "http://localhost:5000/upload/image-1559466841118.jpg"
     }
+}
+```
 
 ## 17. 删除图片
-### 请求URL：
-    http://localhost:5000/manage/img/delete
 
-### 请求方式：
-    POST
+### 删除图片请求URL
 
-### 参数类型:
+> <http://localhost:5000/manage/img/delete>
 
-    |参数		|是否必选 |类型     |说明
-    |name    |Y       |string   |图片文件名
+### 删除图片请求方式
 
-### 返回示例：
-    {
-      "status": 0
-    }
+> POST
+
+### 删除图片参数类型
+
+|参数|是否必选 |类型     |说明|
+|:--:|:------:|:--:|:---:|
+|name    |Y       |string   |图片文件名|
+
+### 删除图片返回示例
+
+```json
+{
+    "status": 0
+}
+```
 
 ## 18. 添加角色
 
