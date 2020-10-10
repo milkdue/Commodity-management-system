@@ -35,3 +35,7 @@ export const reqSearchProductList = (pageNum,pageSize,searchType,keyWord) => myA
 export const reqProductDetail = (productId) => myAxios.get(`${BASE_URL}/manage/product/info`, {params:{productId}});
 // 根据分类id获取商品分类
 export const reqProductCategory = (categoryId) => myAxios.get(`${BASE_URL}/manage/category/info`, {params:{categoryId}});
+// 删除图片
+export const reqRemovePhoto = (name) => myAxios.post(`${BASE_URL}/manage/img/delete`, {name});
+// 添加商品
+export const reqAddProduct = (obj) => myAxios.post(`${BASE_URL}/manage/product/add`, {...obj});
