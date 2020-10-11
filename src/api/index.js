@@ -51,3 +51,7 @@ export const reqAuthRole = (obj) => myAxios.post(`${BASE_URL}/manage/role/update
 export const reqUserList = () => myAxios.get(`${BASE_URL}/manage/user/list`);
 // 添加一个用户
 export const reqAddUser = (obj) => myAxios.post(`${BASE_URL}/manage/user/add`, {...obj});
+// 请求修改一个用户
+export const reqUpdateUser = (obj) => myAxios.post(`${BASE_URL}/manage/user/update`, {...obj});
+// 请求删除一个用户
+export const reqDeleteUser = (userId) => myAxios.post(`${BASE_URL}/manage/user/delete`, {userId});

@@ -10,7 +10,9 @@ const { SubMenu } = Menu;
 
 @connect(
     state => ({
-        title: state
+        title: state,
+        username: state.userInfo.user.username,
+        roleList: state.userInfo.user.role.menus
     }),
     {
         saveTitle: createSaveTitleAction
@@ -20,23 +22,39 @@ const { SubMenu } = Menu;
 class LeftNav extends Component {
     createMenuList = (list) => {
         return list.map((item) => {
-            if(!item.children){
-                return (
-                    <Menu.Item onClick={() => {this.props.saveTitle(item.title)}} key={item.key} icon={<item.icon/>}>
-                        <Link to={item.path}>
-                            {item.title}
-                        </Link>
-                    </Menu.Item>
-                )
+            if(this.hasAuth(item)){
+                if(!item.children){
+                    return (
+                        <Menu.Item onClick={() => {this.props.saveTitle(item.title)}} key={item.key} icon={<item.icon/>}>
+                            <Link to={item.path}>
+                                {item.title}
+                            </Link>
+                        </Menu.Item>
+                    )
+                }else{
+                    return (
+                        <SubMenu key={item.key} icon={<item.icon />} title={item.title}>
+                            {this.createMenuList(item.children)}
+                        </SubMenu>
+                    )
+                }
             }else{
-                return (
-                    <SubMenu key={item.key} icon={<item.icon />} title={item.title}>
-                        {this.createMenuList(item.children)}
-                    </SubMenu>
-                )
+                return <span key={item.key}></span>
             }
         })
     }
+
+    hasAuth = (item) => {
+        const {username, roleList} = this.props;
+        if(username === 'admin'){
+            return true;
+        }else if(!item.children){
+            return roleList.indexOf(item.key) !== -1;
+        }else if(item.children){
+            return item.children.some((item2) => roleList.indexOf(item2.key) !== -1);
+        }
+    }
+
     render() {
         return (
             <div>

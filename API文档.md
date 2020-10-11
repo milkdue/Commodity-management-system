@@ -147,41 +147,51 @@ progect_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkNmEyYTU2OTZiODExMjEzYzI
 ```
 
 ## 3. 更新用户
-### 请求URL：
-	http://localhost:5000/manage/user/update
 
-### 请求方式：
-	POST
+> 此功能服务器未作正确处理!
 
-### 参数类型
+### 更新用户请求URL
 
-	|参数		|是否必选 |类型     |说明
-	|_id         |Y       |string   |ID
-    |username    |N       |string   |用户名
-    |phone       |N       |string   |手机号
-    |email       |N       |string   |邮箱
-    |role_id     |N       |string   |角色ID
+> <http://localhost:5000/manage/user/update>
 
-### 返回示例：
-	成功:
-	  {
-        "status": 0,
-        "data": {
-          "_id": "5c3b382c82a14446f4ffb647",
-          "username": "admin6",
-          "password": "d7b79bb6d6f77e6cbb5df2d0d2478361",
-          "phone": "13712341234",
-          "email": "test@qq.com",
-          "create_time": 1547384876804,
-          "__v": 0
-        }
-      }
-	失败
-	  {
-        "status": 1,
-        "msg": "此用户已存在"
-      }
-    
+### 更新用户请求方式
+
+> POST
+
+### 更新用户参数类型
+
+|参数        |是否必选 |类型     |说明  |
+|:----------:|:------:|:-------:|:---:|
+|_id         |Y       |string   |ID   |
+|username    |N       |string   |用户名|
+|phone       |N       |string   |手机号|
+|email       |N       |string   |邮箱  |
+|role_id     |N       |string   |角色ID|
+|password    |N       |string   |密码  |
+
+### 更新用户返回示例
+
+```json
+//成功:
+{
+    "status": 0,
+    "data": {
+        "_id": "5c3b382c82a14446f4ffb647",
+        "username": "admin6",
+        "password": "d7b79bb6d6f77e6cbb5df2d0d2478361",
+        "phone": "13712341234",
+        "email": "test@qq.com",
+        "create_time": 1547384876804,
+        "__v": 0
+    }
+}
+//失败
+{
+    "status": 1,
+    "msg": "此用户已存在"
+}
+```
+
 ## 4. 获取所有用户列表
 
 ### 获取所有用户列表请求URL

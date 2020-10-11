@@ -18,13 +18,11 @@ class Role extends Component{
         roleVisible: false, // 权限可见
         roleList: [], // 角色列表
         authList: [], // 生成权限的数据
-        checkedKeys: ['home'], // 默认选中的节点
+        checkedKeys: [], // 默认选中的节点
         _id: '', // 要授权的角色的id
         menus: [], // 权限key的数组
         isLoading: true
     };
-
-    checkedKeys = [];
 
     componentDidMount(){
         this.getRoleList();
@@ -51,14 +49,22 @@ class Role extends Component{
         this.setState({addVisible: true});
     }
     // 展示设置权限模态框
-    showAuth = (id) => {
-        // 数据回显
-        const {roleList, checkedKeys} = this.state;
-        let result = roleList.find((item) => item._id === id);
-        if(result){
-            let newCheckedKeys = [...checkedKeys, ...result.menus];
-            this.checkedKeys = newCheckedKeys
-            this.setState({checkedKeys: newCheckedKeys});
+    showAuth = (item) => {
+        const id = item._id;
+        const {auth_time} = item;
+        // 如果有授权时间
+        if(auth_time){
+            // 数据回显
+            const {roleList, checkedKeys} = this.state;
+            let result = roleList.find((item) => item._id === id);
+            if(result){
+                let newCheckedKeys = [...checkedKeys, ...result.menus];
+                this.checkedKeys = newCheckedKeys
+                this.setState({checkedKeys: newCheckedKeys});
+            }
+            // 如果没有授权时间 默认选中首页
+        }else{
+            this.setState({checkedKeys: ['home']});
         }
         this.setState({roleVisible: true, _id: id});
     }
@@ -110,7 +116,7 @@ class Role extends Component{
     }
     // 点击取消的回调
     handleRoleCancel = () => {
-        this.setState({roleVisible: false, checkedKeys: ['home']});
+        this.setState({roleVisible: false, checkedKeys: []});
     }
     // 选择的回调
     onCheck = (menus) => {
@@ -149,7 +155,7 @@ class Role extends Component{
                 title: '操作',
                 align: 'center',
                 key: 'operation',
-                render: (item) => (<Button type="link" onClick={() => {this.showAuth(item._id)}}>设置权限</Button>)
+                render: (item) => (<Button type="link" onClick={() => {this.showAuth(item)}}>设置权限</Button>)
             },
         ];
 
@@ -199,7 +205,6 @@ class Role extends Component{
                     <Tree
                         checkable // 节点前添加 Checkbox 复选框
                         onCheck={this.onCheck} // 选中的回调
-                        defaultCheckedKeys={['home']} // 默认选中的节点
                         defaultExpandAll // 展开所有节点
                         treeData={authList} // 数据
                         checkedKeys={checkedKeys}

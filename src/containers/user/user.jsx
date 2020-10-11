@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Card, Button, Table, Modal, Form, Input, Select, message} from 'antd';
-import {UserAddOutlined} from '@ant-design/icons';
+import {UserAddOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
-import {reqUserList, reqAddUser} from '../../api/index.js';
+import {reqUserList, reqAddUser, reqDeleteUser, reqUpdateUser} from '../../api/index.js';
 const {Option} = Select;
 
 
@@ -11,11 +11,30 @@ export default class User extends Component{
         isLoading: true, // 加载
         addVisible: false, // 添加用户模态框
         roles: [], // 所有角色名
-        users: [] // 所有用户信息
+        users: [], // 所有用户信息
+        user: [], // 数据回显指定用户
+        type: 'add', // 判断是修改还是更新
     }
 
     componentDidMount(){
         this.getUserList()
+    }
+
+
+    componentDidUpdate(){
+        if(this.state.user.length !== 0){
+            if(this.state.type !== 'add'){
+                if (this.formRef) {
+                    const {username, role_id, phone, email} = this.state.user;
+                    this.formRef.setFieldsValue({
+                        username,
+                        email,
+                        role_id,
+                        phone
+                    })
+                }
+            }
+        }
     }
     // 获取所有用户列表
     getUserList = async () => {
@@ -29,43 +48,92 @@ export default class User extends Component{
         this.setState({isLoading: false});
     }
     // 
-    showAddModal = () => {
-        this.setState({
-            addVisible: true,
-        });
+    showAddModal = (item) => {
+        const {_id, username, role_id, phone, email} = item;
+        if(_id){
+            this.setState({user: {_id ,username, role_id, phone, email}, type: 'update'})
+        }else{
+            if(this.formRef){
+                this.formRef.resetFields();//重置表单
+            }
+            this.setState({type: 'add'});
+        }
+        this.setState({addVisible: true});
     };
 
     handleAddOk = () => {
         // 表单验证
         this.formRef.validateFields()
-        .then(value => {
-            reqAddUser(value).then(result => {
-                if(result.status === 0){
-                    message.success('添加成功!', 1);
-                    this.getUserList()
+            .then(value => {
+                if(this.state.type === 'add'){
+                    reqAddUser(value).then(result => {
+                        if(result.status === 0){
+                            message.success('添加成功!', 1);
+                            this.getUserList();
+                            if(this.formRef){
+                                this.formRef.resetFields();//重置表单
+                            }
+                            this.setState({addVisible: false});
+                        }else{
+                            message.warning(result.msg + '!', 1);
+                        }
+                    })
                 }else{
-                    message.warning(result.msg + '!', 1);
+                    const {_id} = this.state.user;
+                    const {username, email, phone, role_id, password} = value;
+                    this.flag = true;
+                    reqUpdateUser({_id, username, phone, password, email, role_id}).then(value => {
+                        if(value.status === 0){
+                            message.success('修改成功!', 1);
+                            this.getUserList();
+                            if(this.formRef){
+                                this.formRef.resetFields();//重置表单
+                            }
+                            this.setState({addVisible: false});
+                        }else{
+                            message.error('修改失败,请稍后重试!', 1);
+                            this.setState({addVisible: false});
+                        }
+                    })
                 }
             })
-        })
-        .catch(error => message.error(error.message, 1))
-        this.setState({
-            addVisible: false,
-        });
+            .catch(error => message.error('请检查输入项!', 1))
     };
 
     handleAddCancel = () => {
-        this.setState({
-            addVisible: false,
-        });
+        this.formRef.resetFields();//重置表单
+        this.setState({addVisible: false});
     };
-    // 选择框
-    handleChange = () => {
 
+
+    confirm = (item) => {
+        Modal.confirm({
+          title: '用户删除',
+          icon: <ExclamationCircleOutlined />,
+          content: '此操作不可逆!',
+          okText: '确认',
+          cancelText: '取消',
+          onOk: () => {
+            this.deleteUserInfo(item._id);
+          },
+          onCancel() {
+            message.loading('取消', 0.5);
+          },
+        });
+    }
+
+    deleteUserInfo = async (id) => {
+        let result = await reqDeleteUser(id);
+        if(result.status === 0){
+            message.success('删除成功!', 1);
+            this.getUserList();
+        }else{
+            message.error('删除失败!', 1);
+        }
     }
 
     render(){
-        const {isLoading, addVisible, roles, users} = this.state;
+        const {isLoading, addVisible, roles, users, type} = this.state;
         const columns = [
             {
                 title: '用户名',
@@ -103,11 +171,11 @@ export default class User extends Component{
                 title: '操作',
                 key: 'operation',
                 align: 'center',
-                render: () => {
+                render: (item) => {
                     return (
                         <div>
-                            <Button type="link">修改</Button>
-                            <Button type="link">删除</Button>
+                            <Button type="link" onClick={() => {this.showAddModal(item)}}>修改</Button>
+                            <Button type="link" onClick={() => {this.confirm(item)}}>删除</Button>
                         </div>
                     )
                 }
@@ -116,7 +184,7 @@ export default class User extends Component{
         return (
             <div>
                 <Modal
-                    title="用户添加"
+                    title={type === 'add' ? '用户添加' : '用户修改'}
                     visible={addVisible}
                     onOk={this.handleAddOk}
                     onCancel={this.handleAddCancel}
@@ -159,23 +227,24 @@ export default class User extends Component{
                             name="password"
                             label="密码"
                             rules={[
-                                {
-                                    required: true,
-                                    message: '密码不能为空!'
-                                },
-                                {
-                                    min: 5,
-                                    message: '密码必须大于等于5位!'
-                                },
-                                {
-                                    max: 18,
-                                    message: '密码必须小于等于18位!'
-                                },
-                                {
-                                    pattern: /^\w+$/,
-                                    message: '密码必须由字母数字下划线组成!'
-                                }
-                            ]}
+                                    {
+                                        required: true,
+                                        message: '密码不能为空!'
+                                    },
+                                    {
+                                        min: 5,
+                                        message: '密码必须大于等于5位!'
+                                    },
+                                    {
+                                        max: 18,
+                                        message: '密码必须小于等于18位!'
+                                    },
+                                    {
+                                        pattern: /^\w+$/,
+                                        message: '密码必须由字母数字下划线组成!'
+                                    }
+                                ]
+                            }
                         >
                             <Input
                                 placeholder="请输入密码"
@@ -229,7 +298,7 @@ export default class User extends Component{
                                 }
                             ]}
                         >
-                            <Select onChange={this.handleChange} placeholder="请选择一个角色">
+                            <Select placeholder="请选择一个角色">
                                 {
                                     roles.map((item) => (<Option value={item._id} key={item._id}>{item.name}</Option>))
                                 }
