@@ -40,6 +40,7 @@ class Header extends Component{
         // 发请求获取位置
         reqLocal()
             .then(result => {
+                console.log(result)
                 this.setState({local: result});
                 // 发请求获取天气
                 let placeReg = /(\S+)市$/;

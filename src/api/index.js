@@ -8,7 +8,9 @@ export const reqLogin = (username, password) => myAxios.post(`${BASE_URL}/login`
 // 位置 jsonp
 export const reqLocal = () => {
     return new Promise((resolve, reject) => {
-        jsonp('http://whois.pconline.com.cn/ipJson.jsp?jsonp=true', (err, data) => {
+        // http://whois.pconline.com.cn/ipJson.jsp/?jsonp=true    http://whois.pconline.com.cn/jsFunction.jsp
+        jsonp('http://whois.pconline.com.cn/ipJson.jsp/?jsonp=true', (err, data) => {
+            console.log(data)
             if(err){
                 reject('位置接口错误!');
             }else{
@@ -17,6 +19,10 @@ export const reqLocal = () => {
         })
     })
 };
+
+// export const reqLocal = () => {
+//     myAxios.get(`${BASE_URL}/location/local`).then(value => console.log(value));
+// }
 // 天气
 export const reqWeather = (place) => axios.get(`http://wthrcdn.etouch.cn/weather_mini?city=${place}`);
 // 分类列表

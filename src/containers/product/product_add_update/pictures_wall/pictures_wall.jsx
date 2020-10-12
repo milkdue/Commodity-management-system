@@ -56,6 +56,7 @@ export default class PicturesWall extends React.Component {
       this.setState({fileList});
     }
     if(file.status === 'removed'){
+      console.log(file.uid)
       let result = await reqRemovePhoto(file.uid);
       if(result.status === 0){
         message.success('删除成功!', 1);
